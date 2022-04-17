@@ -20,7 +20,7 @@ function useProvideAuth() {
   const signIn = async (email, password) => {
     const options = {
       headers: {
-        accept: '*/*',
+        accept: '*',
         'Content-Type': 'application/json',
       },
     };

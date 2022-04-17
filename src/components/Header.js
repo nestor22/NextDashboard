@@ -23,8 +23,8 @@ export default function Header() {
   const auth = useAuth();
 
   const userData = {
-    name: auth?.user.name,
-    email: auth?.user.mail,
+    name: auth?.user?.name,
+    email: auth?.user?.mail,
     imageUrl: `https://ui-avatars.com/api/?name=${auth?.user?.name}`,
   };
 
