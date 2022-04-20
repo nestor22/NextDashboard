@@ -1,25 +1,33 @@
-const people = [
-  {
-    name: 'Jane Cooper',
-    title: 'Regional Paradigm Technician',
-    department: 'Optimization',
-    role: 'Admin',
-    email: 'jane.cooper@example.com',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60',
-  },
-];
 import Image from 'next/image';
 import useFetch from '@hooks/useFetch';
 import endPoints from '@services/api';
+import { Chart } from '@common/Chart';
 const PRODUCT_LIMIT = 5;
 const PRODUCT_OFFET = 5;
 
 export default function Dashboard() {
-  const products = useFetch(endPoints.products.getProducts(PRODUCT_LIMIT,PRODUCT_OFFET));
+  const products = useFetch(endPoints.products.getProducts(PRODUCT_LIMIT, PRODUCT_OFFET));
 
-  console.log(products);
+  const categoryName = products?.map((product) =>product.category)
+
+  const categoryCount = categoryName?.map((category) => category.name)
+
+  const countOcurrences = (arr) => arr.reduce((prev, curr)=>((prev[curr] = ++prev[curr]|| 1), prev), {})
+
+  const data = {
+    datasets: [
+      {
+        label: 'Categories',
+        data: countOcurrences(categoryCount),
+        borderWidth: 2,
+        backgroundColor: ['#ffbb11', '#c0c0c0', '#50af95', '#f2ba2f', '#2a71d0'],
+      },
+    ],
+  };
+
   return (
     <>
+      <Chart chartData={data} className="mb-8 mt-2" />
       <div className="flex flex-col">
         <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
           <div className="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
@@ -61,7 +69,7 @@ export default function Dashboard() {
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="text-sm text-gray-500">{product.category.name}</div>
+                        <div className="text-sm text-gray-500">{product.category.name}</div>
                         <div className="text-sm text-gray-500">{product.category.id}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
