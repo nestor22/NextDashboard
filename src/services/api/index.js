@@ -1,8 +1,8 @@
 const API = process.env.NEXT_PUBLIC_API_URL;
-const VERSION = process.env.NEST_PUBLIC_API_VERSION;
+const VERSION = process.env.NEXT_PUBLIC_API_VERSION;
 const endPoints = {
   products: {
-    getProducts:(limit, offset) =>`${API}/api/${VERSION}/products?limit${limit}&offset=${offset}`,
+    getProducts:(limit, offset) =>`${API}/api/${VERSION}/products?limit=${limit}&offset=${offset}`,
     postProducts: `${API}/api/${VERSION}/products/`,
     getProduct: (id) => `${API}/api/${VERSION}/products/${id}`,
     putProducts: (id) => `${API}/api/${VERSION}/products/${id}`,
