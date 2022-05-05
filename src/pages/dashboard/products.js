@@ -1,16 +1,17 @@
-import { useState } from 'react';
+import { Fragment, useState } from 'react';
 import { CheckIcon } from '@heroicons/react/solid';
 import Modal from '@common/Modal';
+import FormProduct from '@components/FromProducts';
 
 export default function products() {
   const [open, setOpen] = useState(false);
-  const [products, setProducts] = useState();
+  const [products, setProducts] = useState([]);
 
   return (
     <>
       <div className="lg:flex lg:items-center lg:justify-between mb-8">
         <div className="flex-1 min-w-0">
-          <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">List of products</h2>
+          <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">List of Products</h2>
         </div>
         <div className="mt-5 flex lg:mt-0 lg:ml-4">
           <span className="sm:ml-3">
@@ -55,11 +56,11 @@ export default function products() {
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
                   {products?.map((product) => (
-                    <tr key={`product-item-${product.id}`}>
+                    <tr key={`Product-item-${product.id}`}>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-10 w-10">
-                            <Image className="h-10 w-10 rounded-full" src={product?.images[0]} alt="" layout="responsive" width="100%" height="100%" />
+                            <img className="h-10 w-10 rounded-full" src={product.images[0]} alt="" />
                           </div>
                           <div className="ml-4">
                             <div className="text-sm font-medium text-gray-900">{product.title}</div>
@@ -67,20 +68,19 @@ export default function products() {
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="text-sm text-gray-500">{product.category.name}</div>
-                        <div className="text-sm text-gray-500">{product.category.id}</div>
+                        <div className="text-sm text-gray-900">{product.category.name}</div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
+                        <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">${product.price}</span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.id}</td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="#" className="text-indigo-600 hover:text-indigo-900">
+                        <a href="/edit" className="text-indigo-600 hover:text-indigo-900">
                           Edit
                         </a>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="#" className="text-indigo-600 hover:text-indigo-900">
+                        <a href="/edit" className="text-indigo-600 hover:text-indigo-900">
                           Delete
                         </a>
                       </td>
@@ -92,8 +92,8 @@ export default function products() {
           </div>
         </div>
       </div>
-      <Modal open={open} setOpen={setOpen} >
-        <h1> Hola mundo </h1>
+      <Modal open={open} setOpen={setOpen}>
+        <FormProduct />
       </Modal>
     </>
   );
