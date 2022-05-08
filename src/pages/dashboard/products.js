@@ -1,18 +1,18 @@
 import { useState, useEffect } from 'react';
 import { CheckIcon, XCircleIcon } from '@heroicons/react/solid';
-import axios from 'axios'
+import axios from 'axios';
 import Modal from '@common/Modal';
 import FormProduct from '@components/FromProducts';
 import endPoints from '@services/api';
 import useAlert from '@hooks/useAlert';
 import Alert from '@common/Alert';
-import { deleteProduct } from '@services/api/products'
-import Link from "next/link"
+import { deleteProduct } from '@services/api/products';
+import Link from 'next/link';
 
 export default function Products() {
   const [open, setOpen] = useState(false);
   const [products, setProducts] = useState([]);
-  const {alert, setAlert, toogleAlert} = useAlert();
+  const { alert, setAlert, toogleAlert } = useAlert();
 
   useEffect(() => {
     async function getProducts() {
@@ -27,17 +27,15 @@ export default function Products() {
     }
   }, [alert]);
 
-  const handleClose = (id)=>{
-    deleteProduct(id).then(()=>{
-      setAlert(
-        {active: true, message: 'delete product succefully', type:'error', autoClose: true}
-      );
-    })
-  }
+  const handleClose = (id) => {
+    deleteProduct(id).then(() => {
+      setAlert({ active: true, message: 'delete product succefully', type: 'error', autoClose: true });
+    });
+  };
 
   return (
     <>
-    <Alert alert = {alert} handleClose = {toogleAlert}/>
+      <Alert alert={alert} handleClose={toogleAlert} />
       <div className="lg:flex lg:items-center lg:justify-between mb-8">
         <div className="flex-1 min-w-0">
           <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">List of Products</h2>
@@ -76,9 +74,7 @@ export default function Products() {
                       Id
                     </th>
                     <th scope="col" className="relative px-6 py-3">
-                      <span className="sr-only">
-                      Edit
-                        </span>
+                      <span className="sr-only">Edit</span>
                     </th>
                     <th scope="col" className="relative px-6 py-3">
                       <span className="sr-only">Delete</span>
@@ -111,10 +107,7 @@ export default function Products() {
                         </Link>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <XCircleIcon className="flex-shrink-0 h-6 w-6 text-gray-400 cursor-pointer" 
-                        aria-hidden= "true"
-                          onClick = {()=> handleClose(product.id)}
-                        />
+                        <XCircleIcon className="flex-shrink-0 h-6 w-6 text-gray-400 cursor-pointer" aria-hidden="true" onClick={() => handleClose(product.id)} />
                       </td>
                     </tr>
                   ))}
@@ -125,7 +118,7 @@ export default function Products() {
         </div>
       </div>
       <Modal open={open} setOpen={setOpen}>
-        <FormProduct setAlert = {setAlert} setOpen = {setOpen}/>
+        <FormProduct setAlert={setAlert} setOpen={setOpen} />
       </Modal>
     </>
   );

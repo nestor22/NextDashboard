@@ -8,11 +8,11 @@ const PRODUCT_OFFET = 5;
 export default function Dashboard() {
   const products = useFetch(endPoints.products.getProducts(PRODUCT_LIMIT, PRODUCT_OFFET));
 
-  const categoryName = products?.map((product) =>product.category)
+  const categoryName = products?.map((product) => product.category);
 
-  const categoryCount = categoryName?.map((category) => category.name)
+  const categoryCount = categoryName?.map((category) => category.name);
 
-  const countOcurrences = (arr) => arr.reduce((prev, curr)=>((prev[curr] = ++prev[curr]|| 1), prev), {})
+  const countOcurrences = (arr) => arr.reduce((prev, curr) => ((prev[curr] = ++prev[curr] || 1), prev), {});
 
   const data = {
     datasets: [
@@ -28,7 +28,6 @@ export default function Dashboard() {
   return (
     <>
       <Chart chartData={data} className="mb-8 mt-2" />
-     
     </>
   );
 }
