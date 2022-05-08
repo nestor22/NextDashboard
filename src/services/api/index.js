@@ -7,7 +7,8 @@ const endPoints = {
     getProduct: (id) => `${API}/api/${VERSION}/products/${id}`,
     putProducts: (id) => `${API}/api/${VERSION}/products/${id}`,
     deleteProducts: (id) => `${API}/api/${VERSION}/products/${id}`,
-    addProducts: `${API}/api/${VERSION}/products`
+    addProducts: `${API}/api/${VERSION}/products`, 
+    updateProduct: (id) => `${API}/api/${VERSION}/products/${id}`
 
   },
   users: {
